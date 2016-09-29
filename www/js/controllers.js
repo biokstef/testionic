@@ -1,9 +1,5 @@
 angular.module('nearlyevent.controllers', [])
 
-.controller('AppCtrl', function() {
-
-})
-
 .controller('PlaylistsCtrl', function($scope) {
     $scope.playlists = [
         { title: 'Reggae', id: 1 },

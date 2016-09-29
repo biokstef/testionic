@@ -15,7 +15,8 @@
             url: '/app',
             abstract: true,
             templateUrl: 'templates/menu.html',
-            controller: 'AppCtrl'
+            controller: 'MainController',
+            controllerAs: 'vm'
         })
 
         .state('app.search', {
@@ -42,6 +43,17 @@
                         templateUrl: 'templates/playlists.html',
                         controller: 'PlaylistsCtrl'
                     }
+                },
+                resolve: {
+                    'acl': ['$q', 'AclService', function($q, AclService) {
+                        if (AclService.can('view_playlists')) {
+                            // Has proper permissions
+                            return true;
+                        } else {
+                            // Does not have permission
+                            return $q.reject('Unauthorized');
+                        }
+                    }]
                 }
             })
 
