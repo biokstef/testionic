@@ -1,0 +1,35 @@
+<ion-view view-title="Ajout de contenu">
+  <ion-content class="padding">
+    <h2>Formulaire</h2>
+    <p ng-show="!vm.loginSuccess">
+	Vous devez vous connecter avant de soumettre
+    </p>
+	<p ng-show="vm.loginSuccess">
+	Vous pouvez soumettre
+    </p>
+	<form ng-submit="vm.doAjouter()">
+	<div class="list">
+      <label class="item item-input">
+        <span class="input-label">Titre</span>
+        <input type="text" placeholder="Titre" ng-model="vm.ajoutData.titre">
+      </label>
+      <label class="item item-input">
+      <textarea placeholder="votre texte" rows="10" ng-model="vm.ajoutData.texte">
+	  </textarea>
+      </label>
+   </div>
+   	  <button class="button button-block button-positive">
+     Ajouter
+      </button>
+   </form>
+    <div class="card" ng-show="vm.ajoutErrorr" ng-repeat="error in vm.ajoutError">
+      <div class="item item-text-wrap assertive">
+        <i class="icon ion-alert-circled"></i>
+        <span ng-bind-html="error"></span>
+      </div>
+    </div>
+   
+   
+   
+  </ion-content>
+</ion-view>

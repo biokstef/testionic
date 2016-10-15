@@ -10,8 +10,8 @@
     /** @ngInject */
     function AuthentificationService($state, $http, $q, $rootScope, AclService, localStorageService, config) {
 
-        var loginEndpoint = 'api/user/login';
-        var sessionTokenEndpoint = 'rest/session/token';
+        var loginEndpoint = 'restapi/user/login';
+        var sessionTokenEndpoint = 'services/session/token';
 
         var service = {
             loginEndpoint: loginEndpoint,
@@ -42,19 +42,20 @@
             return defer.promise;
         };
 
-        function login(username, password, token) {
+        function login(data) {
             var defer = $q.defer();
 
             $http({
                     method: 'POST',
-                    url: config.serviceBaseUrl + loginEndpoint + config.formatJson,
+                    url: config.serviceBaseUrl + loginEndpoint,
                     dataType: 'json',
                     headers: {
-                        'X-CSRF-Token': token,
+                        'X-CSRF-Token': 'http://police.model225.com/services/session/token',
+						'Content-Type': 'application/json'
                     },
                     data: {
-                        username: username,
-                        password: password
+                        username: data.username,
+                        password: data.password
                     },
                 })
                 .then(function(response) {
@@ -72,7 +73,7 @@
             AclService.flushRoles();
             AclService.attachRole('ROLE_GUEST');
             $state.go('login');
-            toastr.success('Déconnexion réussie');
+            console.log('Déconnexion réussie');
         };
 
         function setUserData(user, token, auth) {

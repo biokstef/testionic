@@ -10,7 +10,8 @@
 
 
         'nearlyevent.controllers',
-        'nearlyevent.authentification'
+        'nearlyevent.authentification',
+        'nearlyevent.ajout'
     ]);
 
 })();

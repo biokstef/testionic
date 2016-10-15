@@ -26,7 +26,7 @@
 
         var aclData = {
             ROLE_GUEST: ['login'],
-            ROLE_AUTH: ['logout', 'view_playlists'],
+            ROLE_AUTH: ['logout', 'view_playlists', 'ajout'],
         }
 
         AclService.setAbilities(aclData);

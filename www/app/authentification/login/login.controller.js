@@ -21,15 +21,18 @@
 
         function doLogin() {
             console.log('ok');
-            AuthentificationService.getSessionToken().then(function(data) {
-                var token = data;
+            //AuthentificationService.getSessionToken().then(function(data) {
+                //var token = data;
+				
                 var authToken = 'Basic ' + base64Service.encode(vm.user.username + ':' + vm.user.password);
 
-                AuthentificationService.login(vm.user.username, vm.user.password, token).then(function(data) {
+                AuthentificationService.login(vm.user).then(function(data) {
 
                     vm.loginError = false;
-
-                    AuthentificationService.setUserData(data.User, data.Token, authToken);
+                    
+					console.log(data);
+					
+                    AuthentificationService.setUserData(data.user, data.token, authToken);
                     AclService.detachRole('ROLE_GUEST');
                     AclService.attachRole('ROLE_AUTH');
 
@@ -38,9 +41,9 @@
                 }, function(error) {
                     vm.loginError = error;
                 });
-            }, function(error) {
-                console.log(error);
-            });
+            //}, function(error) {
+                //console.log(error);
+            //});
         }
 
     }
